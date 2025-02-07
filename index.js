@@ -20,7 +20,11 @@ console.log(myLibrary);
 function displayBooks() {
   const container = document.querySelector(".container");
 
-  myLibrary.forEach((book) => {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+
+  myLibrary.forEach((book, index) => {
     let newDiv = document.createElement("div");
     newDiv.classList.add("book-container");
 
@@ -28,18 +32,30 @@ function displayBooks() {
     title.textContent = `Title: ${book.title}`;
 
     let author = document.createElement("p");
-    author.textContent = `Title: ${book.author}`;
+    author.textContent = `Author: ${book.author}`;
 
     let pages = document.createElement("p");
-    pages.textContent = `Title: ${book.pages}`;
+    pages.textContent = `Pages: ${book.pages}`;
 
     let year = document.createElement("p");
-    year.textContent = `Title: ${book.year}`;
+    year.textContent = `Year: ${book.year}`;
 
     newDiv.appendChild(title);
     newDiv.appendChild(author);
     newDiv.appendChild(pages);
     newDiv.appendChild(year);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.id = "deleteBtn";
+    deleteBtn.textContent = "Delete";
+
+    newDiv.appendChild(deleteBtn);
+
+    deleteBtn.addEventListener("click", () => {
+      deleteBtn.style.color = "red";
+      myLibrary.splice(index, 1);
+      displayBooks();
+    });
 
     container.appendChild(newDiv);
   });
@@ -78,4 +94,3 @@ form.addEventListener("submit", function (event) {
 
   form.reset();
 });
-displayBooks();
