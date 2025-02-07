@@ -8,6 +8,31 @@
     <script src="index.js" defer></script>
   </head>
   <body>
+    <dialog id="myDialog">
+      <form>
+        <div>
+          <label for="title">Title: </label>
+        </div>
+        <input type="text" id="title" name="title" />
+        <div>
+          <label for="author">Author: </label>
+        </div>
+        <input type="text" id="author" name="author" />
+        <div>
+          <label for="pages">Pages: </label>
+        </div>
+        <input type="number" id="pages" name="pages" />
+        <div>
+          <label for="year">Year: </label>
+        </div>
+        <input type="number" id="year" name="year" />
+        <div>
+          <button type="submit" id="submitBtn">Submit</button>
+        </div>
+      </form>
+      <button id="closeBtn">Close</button>
+    </dialog>
+    <button id="openBtn">New Book</button>
     <div class="container"></div>
   </body>
 </html>

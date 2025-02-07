@@ -45,4 +45,37 @@ function displayBooks() {
   });
 }
 
+//Submit Button
+const dialog = document.getElementById("myDialog");
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closeBtn");
+const form = document.querySelector("form");
+
+openBtn.addEventListener("click", () => {
+  dialog.showModal(); // Opens the dialog as a modal
+});
+
+document.getElementById("myDialog").addEventListener("click", (event) => {
+  if (event.target === event.currentTarget) {
+    event.target.close(); // Close when clicking outside
+  }
+});
+
+closeBtn.addEventListener("click", () => {
+  dialog.close(); // Closes the dialog
+});
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
+  let pages = document.getElementById("pages").value;
+  let year = document.getElementById("year").value;
+
+  addBookToLibrary(title, author, pages, year);
+  displayBooks();
+
+  form.reset();
+});
 displayBooks();
