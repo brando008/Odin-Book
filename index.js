@@ -5,16 +5,26 @@ function Book(title, author, pages, year) {
   this.author = author;
   this.pages = pages;
   this.year = year;
+  this.read = false;
 }
 
+Book.prototype.hasRead = function () {
+  if (this.read == true) {
+    this.read = false;
+  } else if (this.read == false) {
+    this.read = true;
+  }
+};
+
 function addBookToLibrary(title, author, pages, year) {
-  title = new Book(title, author, pages, year);
-  myLibrary.push(title);
+  let book = new Book(title, author, pages, year);
+  myLibrary.push(book);
 }
 
 addBookToLibrary("Narnia", "C.S. Lewis", 232, 1996);
 addBookToLibrary("Lord of The Rings", "JRR Tok", 312, 1995);
 addBookToLibrary("Hobbit", "JRR Tok", 160, 2000);
+
 console.log(myLibrary);
 
 function displayBooks() {
@@ -40,10 +50,14 @@ function displayBooks() {
     let year = document.createElement("p");
     year.textContent = `Year: ${book.year}`;
 
+    let read = document.createElement("p");
+    read.textContent = `Read: ${book.read}`;
+
     newDiv.appendChild(title);
     newDiv.appendChild(author);
     newDiv.appendChild(pages);
     newDiv.appendChild(year);
+    newDiv.appendChild(read);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.id = "deleteBtn";
@@ -54,6 +68,17 @@ function displayBooks() {
     deleteBtn.addEventListener("click", () => {
       deleteBtn.style.color = "red";
       myLibrary.splice(index, 1);
+      displayBooks();
+    });
+
+    const readBtn = document.createElement("button");
+    readBtn.id = "readBtn";
+    readBtn.textContent = "Read";
+
+    newDiv.appendChild(readBtn);
+
+    readBtn.addEventListener("click", () => {
+      myLibrary[index].hasRead();
       displayBooks();
     });
 
