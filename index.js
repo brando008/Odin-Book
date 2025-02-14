@@ -1,20 +1,17 @@
 const myLibrary = [];
 
-function Book(title, author, pages, year) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.year = year;
-  this.read = false;
-}
-
-Book.prototype.hasRead = function () {
-  if (this.read == true) {
+class Book {
+  constructor(title, author, pages, year) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.year = year;
     this.read = false;
-  } else if (this.read == false) {
-    this.read = true;
   }
-};
+  hasRead() {
+    this.read = !this.read;
+  }
+}
 
 function addBookToLibrary(title, author, pages, year) {
   let book = new Book(title, author, pages, year);
